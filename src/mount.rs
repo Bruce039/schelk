@@ -227,15 +227,15 @@ mod tests {
     #[test]
     fn mount_field_decodes_standard_mntent_escapes() {
         assert_eq!(
-            unescape_mount_field(r"/tmp/a\\040b\\011c\\012d\\134e"),
+            unescape_mount_field(r"/tmp/a\040b\011c\012d\134e"),
             "/tmp/a b\tc\nd\\e"
         );
     }
 
     #[test]
     fn escaped_backslash_is_not_double_decoded() {
-        let mounts = r"/dev/loop0 /tmp/literal\\134040name ext4 rw 0 0";
-        assert!(mounts_contains_mountpoint(mounts, r"/tmp/literal\\040name"));
+        let mounts = r"/dev/loop0 /tmp/literal\134040name ext4 rw 0 0";
+        assert!(mounts_contains_mountpoint(mounts, r"/tmp/literal\040name"));
         assert!(!mounts_contains_mountpoint(mounts, "/tmp/literal name"));
     }
 
